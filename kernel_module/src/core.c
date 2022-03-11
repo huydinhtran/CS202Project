@@ -156,11 +156,11 @@ int blockmma_sync(struct blockmma_cmd __user *user_cmd)
 {    
     if(sendTask == compTask){
 	printk(KERN_INFO "Check Sync Task!!!");
-//	while(task_l->next_task){
-	//	printk(KERN_INFO "Final: %d\n", task_l->count);
-	//	task_l = task_l->next_task;
-	//}
-	copy_to_user((void *)task_l->cmd.c, task_l->c, 256*256*sizeof(float *));
+	while(task_l->next_task){
+		printk(KERN_INFO "Final: %d\n", task_l->count);
+		task_l = task_l->next_task;
+	}
+	copy_to_user((void *)task_l->cmd.c, task_l->c, 128*128*sizeof(float *));
     	struct task_struct *p = current;
     	printk(KERN_INFO "%d\n", p->pid);
     	return 0;
